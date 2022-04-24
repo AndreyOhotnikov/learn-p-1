@@ -1,2 +1,2 @@
-# L-p-1
-L-p-1
+Learning project-1
+Учебный проект по освоению технологий nest, next и typescript
