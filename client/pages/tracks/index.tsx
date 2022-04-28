@@ -8,15 +8,13 @@ import { ITrack } from '../../types/track';
 const Index = () => {
   const router = useRouter()
   const tracks: ITrack[] = [
-    {_id: 'sdfsdf', name: 'fgdfg1'},
-    {_id: 'sdfdgfgf', name: 'fgdfg2'},
-
-    {_id: 'sdfnvf', name: 'fgdfg3'},
-
-    {_id: 'sdfwertdf', name: 'fgdfg4'},
-    {_id: 'sdfgsdfsdf', name: 'fgdfg5'},
-    {_id: 'sdbcdf', name: 'fgdfg6'},
-    {_id: 'sdfdfgf', name: 'fgdfg7'},
+    {_id: '1', name: 'yfpdfybt 1', artist: 'sdfgsdg1', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
+    {_id: '2', name: 'yfpdfybt 2', artist: 'sdfgsdg2', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
+    {_id: '3', name: 'yfpdfybt 3', artist: 'sdfgsdg3', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
+    {_id: '4', name: 'yfpdfybt 4', artist: 'sdfgsdg4', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
+    {_id: '5', name: 'yfpdfybt 5', artist: 'sdfgsdg5', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
+    {_id: '6', name: 'yfpdfybt 6', artist: 'sdfgsdg6', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
+    {_id: '7', name: 'yfpdfybt 7', artist: 'sdfgsdg7', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
 
 
   ]
