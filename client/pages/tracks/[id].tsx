@@ -6,7 +6,15 @@ import MyLayout from '../../layout/MyLyout';
 import { ITrack } from '../../types/track';
 
 const TrackPage = () => {
-  const track: ITrack = {_id: '2', name: 'yfpdfybt 1', artist: 'sdfgsdg', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0}
+  const track: ITrack = {
+    _id: '2', 
+    name: 'yfpdfybt 1', 
+    artist: 'sdfgsdg', 
+    text: 'sdfsdfgsfbfdbxbfbxbgbxbx', 
+    picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', 
+    listens: 0,
+    comments: []
+  }
   const router = useRouter()
   return (
   <MyLayout>
@@ -27,13 +35,28 @@ const TrackPage = () => {
     </Grid>
     <h1>Слова к треку</h1>
     <p>{track.text}</p>
+    <h1>Комментарии</h1>
     <Grid container>
       <TextField
         label="Ваше имя"
         fullWidth
-
       />
+       <TextField
+        label="Комментарий"
+        fullWidth
+        multiline
+        rows={4}
+      />
+      <Button>Отправить</Button>
     </Grid>
+    <div>
+      {track.comments.map(comm => 
+          <div>
+            <div>Автор - {comm.username}</div>
+            <div>Комментарий - {comm.text}</div>
+          </div>
+        )}
+    </div>
   </MyLayout>
   )
 }
