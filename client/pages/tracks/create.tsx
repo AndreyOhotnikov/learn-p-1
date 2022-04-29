@@ -2,6 +2,7 @@ import { Box, Button, Card, Grid, TextField } from '@mui/material';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
+import FileUpload from '../../components/FileUpload';
 import StepWrapper from '../../components/StepWrapper';
 import TrackList from '../../components/TrackList';
 import MyLayout from '../../layout/MyLyout';
@@ -9,6 +10,9 @@ import { ITrack } from '../../types/track';
 
 const CreatePage = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [picture, setPictupe] = useState(null)
+  const [audio, setAudio] = useState(null)
+
   const next = () => {
     setActiveStep(prev=> prev + 1)
   }
@@ -40,10 +44,14 @@ const CreatePage = () => {
         </Grid>
      }
      {activeStep === 1 && 
-        <h1>STEP 2</h1>
+        <FileUpload file={''} setFile={setPictupe} accept='image/*'>
+        <Button>Загрузите изображение</Button>
+      </FileUpload>
      }
      {activeStep === 2 && 
-        <h1>STEP 3</h1>
+        <FileUpload file={''} setFile={setAudio} accept='audio/*'>
+          <Button>Загрузите аудио</Button>
+        </FileUpload>
      }
     </StepWrapper>
       <Grid justifyContent='space-between'>
