@@ -21,9 +21,9 @@ const Player: React.FC<PlayerProps> = ({file, setFile, accept, children}) => {
   const {pause, volume, active, duration, currentTime} = useTypedSelector(state => state.player)
   const {pauseTrack, playTrack, setVolume, setCurrentTime, setActive, setDuration} = useActions()
   
-  useEffect(() => {
-    if (!audio) {
-      audio = new Audio();
+  
+  const setAudio = () => {
+    if (active) {
       audio.src = active.audio;
       audio.volume = volume / 100
       audio.onLoadedmetadata = () => {
@@ -32,11 +32,17 @@ const Player: React.FC<PlayerProps> = ({file, setFile, accept, children}) => {
       audio.ontimeupdate = () => {
         setCurrentTime(Math.floor(audio.currentTime))
       }
-    } 
-  }, [])
-
+    }
+  }
   
-
+  useEffect(() => {
+    if (!audio) {
+      audio = new Audio();
+    } else {
+      setAudio()
+    }
+  }, [])
+  
   const play = () => {
     console.log('fdgdfgdfg')
     if (pause) {
