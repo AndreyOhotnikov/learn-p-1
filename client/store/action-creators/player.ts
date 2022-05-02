@@ -9,18 +9,18 @@ export const pauseTrack = (): PlayerAction => {
   return {type: PlayerActionTypes.PAUSE}
 }
 
-export const setActiveTrack = (payload: ITrack): PlayerAction => {
+export const setActive = (payload: ITrack): PlayerAction => {
   return {type: PlayerActionTypes.SET_ACTIVE, payload}
 }
 
-export const setCurrentTimeTrack = (payload: number): PlayerAction => {
+export const setCurrentTime = (payload: number): PlayerAction => {
   return {type: PlayerActionTypes.SET_CURRENT_TIME, payload}
 }
 
-export const setDurtionTrack = (payload: number): PlayerAction => {
+export const setDurtion = (payload: number): PlayerAction => {
   return {type: PlayerActionTypes.SET_DURATION, payload}
 }
 
-export const setVolumeTrack = (payload: number): PlayerAction => {
+export const setVolume = (payload: number): PlayerAction => {
   return {type: PlayerActionTypes.SET_VOLUME, payload}
 }

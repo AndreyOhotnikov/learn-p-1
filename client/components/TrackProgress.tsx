@@ -20,7 +20,7 @@ const TrackProgres: React.FC<TrackProgresProps> = ({left, right, onChenge}) => {
     <div style={{display: 'flex'}}>
        <input 
         type="range" 
-        min={left}
+        min={0}
         max={right}
         value={left}
         onChange={onChenge}

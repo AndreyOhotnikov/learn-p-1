@@ -1,9 +1,12 @@
 import { Pause, PlayArrow, VolumeUp } from '@mui/icons-material';
-import { Grid, IconButton } from '@mui/material';
+import { Grid, IconButton, useRadioGroup } from '@mui/material';
 import React from 'react';
 import { ITrack } from '../types/track';
 import style from '../styles/Player.module.scss'
 import TrackProgress from './TrackProgress';
+import { useTypedSelector } from '../hooks/useTypeDSelector';
+import { useActions } from '../hooks/useActions';
+import { useEffect } from 'react';
 
 interface PlayerProps {
   file: any;
@@ -11,34 +14,53 @@ interface PlayerProps {
   accept: string;
   children: any
 }
-const track: ITrack = {
-  _id: '2', 
-  name: 'yfpdfybt 1', 
-  artist: 'sdfgsdg', 
-  text: 'sdfsdfgsfbfdbxbfbxbgbxbx', 
-  picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', 
-  listens: 0,
-  comments: []
-}
+
+let audio;
 
 const Player: React.FC<PlayerProps> = ({file, setFile, accept, children}) => {
-  const active = false
+  const {pause, volume, active, duration, currentTime} = useTypedSelector(state => state.player)
+  const {pauseTrack, playTrack, setVolume, setCurrentTime, setActive} = useActions()
+  
+  useEffect(() => {
+    if (!audio) {
+      audio = new Audio();
+      audio.src = active.audio;
+      audio.volume = volume / 100
+    } 
+  }, [])
+
+  const play = () => {
+    console.log('fdgdfgdfg')
+    if (pause) {
+      playTrack();
+      audio.play();
+    } else {
+      pauseTrack();
+      audio.pause();
+    }
+  }
+
+  const chengeVoluve = (e: React.ChangeEvent<HTMLInputElement>) => {
+    audio.volume = Number(e.target.value) / 100
+    setVolume(Number(e.target.value))
+  }
+
   
   return (
     <div className={style.player}>
-     <IconButton onClick={e => e.stopPropagation()}>
+     <IconButton onClick={play}>
         {active
         ? <Pause/>
         : <PlayArrow/>
         }
       </IconButton>
       <Grid container direction='column' style={{width: '200px', margin: '0 20px'}}>
-        <div>{track.name}</div>
-        <div style={{fontSize: 12, color: 'gray'}}>{track.artist}</div>
+        <div>{active?.name}</div>
+        <div style={{fontSize: 12, color: 'gray'}}>{active?.artist}</div>
       </Grid>
       <TrackProgress left={0} right={100} onChenge={() => {}}/>
       <VolumeUp style={{marginLeft: 'auto'}}/>
-      <TrackProgress left={0} right={100} onChenge={() => {}}/>
+      <TrackProgress left={volume} right={100} onChenge={chengeVoluve}/>
 
     </div>
     )

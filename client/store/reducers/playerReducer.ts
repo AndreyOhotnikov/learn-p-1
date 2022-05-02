@@ -4,7 +4,7 @@ import { PlayerAction, PlayerActionTypes, PlayerState } from "../../types/player
 const initialState: PlayerState = {
   currentTime: 0,
   active: null,
-  volume: 0,
+  volume: 50,
   duration: 0,
   pause: true
 }
