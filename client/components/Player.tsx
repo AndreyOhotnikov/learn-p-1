@@ -1,11 +1,7 @@
 import { Pause, PlayArrow, VolumeUp } from '@mui/icons-material';
-import { Box, Button, Card, Grid, IconButton } from '@mui/material';
-import { useRouter } from 'next/router';
+import { Grid, IconButton } from '@mui/material';
 import React from 'react';
-import { Children } from 'react';
-import { useRef } from 'react';
 import { ITrack } from '../types/track';
-import TrackItem from './TrackItem';
 import style from '../styles/Player.module.scss'
 import TrackProgress from './TrackProgress';
 

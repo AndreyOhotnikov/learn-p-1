@@ -1,4 +1,4 @@
-import { Box, Button, Card, Grid, IconButton } from '@mui/material';
+import { Card, Grid, IconButton } from '@mui/material';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { ITrack } from '../types/track';
@@ -17,7 +17,7 @@ const TrackItem: React.FC<TrackItemProps> = ({track, active=false}) => {
 
   
   return (
-    <Grid className={style.track} onClick={() => router.push('/tracks/' + track._id)}>
+    <Card className={style.track} onClick={() => router.push('/tracks/' + track._id)}>
       <IconButton onClick={e => e.stopPropagation()}>
         {active
         ? <Pause/>
@@ -28,13 +28,13 @@ const TrackItem: React.FC<TrackItemProps> = ({track, active=false}) => {
       <Grid container direction='column' style={{width: '200px', margin: '0 20px'}}>
         <div>{track.name}</div>
         <div style={{fontSize: 12, color: 'gray'}}>{track.artist}</div>
+      </Grid>
         {active && <div>02:42 / 03:23</div>}
         <IconButton onClick={e => e.stopPropagation()} style={{marginLeft: 'auto'}}>
           <Delete></Delete>
         </IconButton>
-      </Grid>
           
-    </Grid>
+    </Card>
   )
 }
 

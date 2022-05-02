@@ -1,8 +1,6 @@
-import { Box, Button, Card, Container, Grid, Step, StepLabel, Stepper } from '@mui/material';
+import { Card, Container, Grid, Step, StepLabel, Stepper } from '@mui/material';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { ITrack } from '../types/track';
-import TrackItem from './TrackItem';
 
 
 interface StepWrapperProps {
