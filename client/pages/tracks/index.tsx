@@ -2,11 +2,13 @@ import { Box, Button, Card, Grid } from '@mui/material';
 import { useRouter } from 'next/router';
 import React from 'react';
 import TrackList from '../../components/TrackList';
+import { useTypedSelector } from '../../hooks/useTypeDSelector';
 import MyLayout from '../../layout/MyLyout';
 import { ITrack } from '../../types/track';
 
 const Index = () => {
   const router = useRouter()
+  // const {} = useTypedSelector(state => state.player)
   const tracks: ITrack[] = [
     {_id: '1', name: 'yfpdfybt 1', artist: 'sdfgsdg1', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
     {_id: '2', name: 'yfpdfybt 2', artist: 'sdfgsdg2', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},

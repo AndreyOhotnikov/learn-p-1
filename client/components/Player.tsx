@@ -35,14 +35,6 @@ const Player: React.FC<PlayerProps> = ({file, setFile, accept, children}) => {
     }
   }
   
-  useEffect(() => {
-    if (!audio) {
-      audio = new Audio();
-    } else {
-      setAudio()
-    }
-  }, [])
-  
   const play = () => {
     console.log('fdgdfgdfg')
     if (pause) {
@@ -54,6 +46,16 @@ const Player: React.FC<PlayerProps> = ({file, setFile, accept, children}) => {
     }
   }
 
+  useEffect(() => {
+    if (!audio) {
+      audio = new Audio();
+    } else {
+      setAudio()
+      play()
+    }
+  }, [active])
+  
+
   const chengeVoluve = (e: React.ChangeEvent<HTMLInputElement>) => {
     audio.volume = Number(e.target.value) / 100
     setVolume(Number(e.target.value))
@@ -64,6 +66,7 @@ const Player: React.FC<PlayerProps> = ({file, setFile, accept, children}) => {
     setCurrentTime(Number(e.target.value))
   }
 
+  if (!active) return null;
   
   return (
     <div className={style.player}>

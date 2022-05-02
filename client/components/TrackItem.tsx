@@ -4,6 +4,7 @@ import React from 'react';
 import { ITrack } from '../types/track';
 import style from '../styles/TrackItem.module.scss'
 import { Delete, Pause, PlayArrow } from '@mui/icons-material';
+import { useActions } from '../hooks/useActions';
 
 interface TrackItemProps {
   track: ITrack;
@@ -13,6 +14,14 @@ interface TrackItemProps {
 
 const TrackItem: React.FC<TrackItemProps> = ({track, active=false}) => {
   const router = useRouter()
+
+  const {playTrack, pauseTrack, setActive} = useActions()
+
+  const play = (e) => {
+    e.stopPropagation();
+    setActive(track);
+    playTrack();
+  }
  
 
   
