@@ -19,15 +19,23 @@ let audio;
 
 const Player: React.FC<PlayerProps> = ({file, setFile, accept, children}) => {
   const {pause, volume, active, duration, currentTime} = useTypedSelector(state => state.player)
-  const {pauseTrack, playTrack, setVolume, setCurrentTime, setActive} = useActions()
+  const {pauseTrack, playTrack, setVolume, setCurrentTime, setActive, setDuration} = useActions()
   
   useEffect(() => {
     if (!audio) {
       audio = new Audio();
       audio.src = active.audio;
       audio.volume = volume / 100
+      audio.onLoadedmetadata = () => {
+        setDuration(Math.floor(audio.duration))
+      }
+      audio.ontimeupdate = () => {
+        setCurrentTime(Math.floor(audio.currentTime))
+      }
     } 
   }, [])
+
+  
 
   const play = () => {
     console.log('fdgdfgdfg')
@@ -45,6 +53,11 @@ const Player: React.FC<PlayerProps> = ({file, setFile, accept, children}) => {
     setVolume(Number(e.target.value))
   }
 
+  const chengeCurrentTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+    audio.currentTime = Number(e.target.value)
+    setCurrentTime(Number(e.target.value))
+  }
+
   
   return (
     <div className={style.player}>
@@ -58,7 +71,7 @@ const Player: React.FC<PlayerProps> = ({file, setFile, accept, children}) => {
         <div>{active?.name}</div>
         <div style={{fontSize: 12, color: 'gray'}}>{active?.artist}</div>
       </Grid>
-      <TrackProgress left={0} right={100} onChenge={() => {}}/>
+      <TrackProgress left={currentTime} right={duration} onChenge={chengeCurrentTime}/>
       <VolumeUp style={{marginLeft: 'auto'}}/>
       <TrackProgress left={volume} right={100} onChenge={chengeVoluve}/>
 

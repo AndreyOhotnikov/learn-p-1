@@ -17,7 +17,7 @@ export const setCurrentTime = (payload: number): PlayerAction => {
   return {type: PlayerActionTypes.SET_CURRENT_TIME, payload}
 }
 
-export const setDurtion = (payload: number): PlayerAction => {
+export const setDuration = (payload: number): PlayerAction => {
   return {type: PlayerActionTypes.SET_DURATION, payload}
 }
 
