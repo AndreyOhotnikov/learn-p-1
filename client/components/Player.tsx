@@ -9,10 +9,10 @@ import { useActions } from '../hooks/useActions';
 import { useEffect } from 'react';
 
 interface PlayerProps {
-  file: any;
-  setFile: Function
-  accept: string;
-  children: any
+  file?: any;
+  setFile?: Function
+  accept?: string;
+  children?: any
 }
 
 let audio;

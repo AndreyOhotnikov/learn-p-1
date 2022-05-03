@@ -1,7 +1,7 @@
 import { Container } from '@mui/material';
-import Head from 'next/head';
 import React from 'react';
-import Navbar from '../components/navbar';
+import Head from 'next/head';
+import Navbar from '../components/Navbar';
 import Player from '../components/Player';
 
 interface MyLayoutProps {

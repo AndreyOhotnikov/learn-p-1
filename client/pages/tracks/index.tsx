@@ -1,20 +1,34 @@
 import { Box, Button, Card, Grid, TextField } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import TrackList from '../../components/TrackList';
 import { useTypedSelector } from '../../hooks/useTypeDSelector';
 import MyLayout from '../../layout/MyLyout';
 import {NextThunkDispatch, wrapper} from "../../store";
-import { fetchTracks } from '../../store/action-creators/track';
+import { fetchTracks, searchTracks } from '../../store/action-creators/track';
 import { ITrack } from '../../types/track';
 
 const Index = () => {
   const router = useRouter()
   const {tracks, error} = useTypedSelector(state => state.track)
   const [query, setQuery] = useState<string>('');
+  const dispatch = useDispatch() as NextThunkDispatch;
+  const [timer, setTimer] = useState(null);
 
-  const search = (e: React.ChangeEvent<HTMLInputElement>) => {
 
+  const search = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value)
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    setTimer(
+      setTimeout(async () => {
+        await dispatch(await searchTracks(e.target.value))
+      }, 500)
+    )
+    
   }
 
   if (error) return (
@@ -50,6 +64,6 @@ const Index = () => {
 export default Index
 
 export const getServerSideProps = wrapper.getServerSideProps(async ({store}) => {
-  const dispatch = store.disptch as NextThunkDispatch
-  store.dispatch(await fetchTracks())
+  const dispatch = store.dispatch as NextThunkDispatch
+  await dispatch(await fetchTracks())
 })
