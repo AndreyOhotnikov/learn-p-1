@@ -1,21 +1,22 @@
 import { Box, Button, Card, Grid, TextField } from '@mui/material';
+import axios from 'axios';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useState } from 'react';
 import TrackList from '../../components/TrackList';
 import MyLayout from '../../layout/MyLyout';
 import { ITrack } from '../../types/track';
 
-const TrackPage = () => {
-  const track: ITrack = {
-    _id: '2', 
-    name: 'yfpdfybt 1', 
-    artist: 'sdfgsdg', 
-    text: 'sdfsdfgsfbfdbxbfbxbgbxbx', 
-    picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', 
-    listens: 0,
-    comments: []
-  }
+const TrackPage = ({serverTrack}) => {
+  const [track, setTrack] = useState(serverTrack)
   const router = useRouter()
+
+  const addComment = () => {
+
+  }
+
+
   return (
   <MyLayout>
     <Button
@@ -26,7 +27,7 @@ const TrackPage = () => {
       К списку
     </Button>
     <Grid container style={{margin: '20px 0'}}>
-      <img src={track.picture} width={200} height={200} alt="" />
+      <img src={'http://loclhost:5000/' + track.picture} width={200} height={200} alt="" />
       <div style={{margin: '20px 0'}}>
         <h1>Название трека - {track.name}</h1>
         <h1>Исполитель - {track.artist}</h1>
@@ -62,3 +63,12 @@ const TrackPage = () => {
 }
 
 export default TrackPage
+
+export const getServerSideProps: GetServerSideProps = async ({params}) => {
+  const response = await axios.get('http://loclhost:5000/tracks/' + params.id)
+  return {
+    props: {
+      serverTrack: response.data
+    }
+  }
+}
