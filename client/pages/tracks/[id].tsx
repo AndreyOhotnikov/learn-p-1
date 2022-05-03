@@ -31,7 +31,10 @@ const TrackPage = ({serverTrack}) => {
 
 
   return (
-  <MyLayout>
+  <MyLayout 
+    title={`Музыкальная площадка -${track.name} - ${track.artist}`}
+    keywords={'музыка, артист' + track.name + track.artist}
+  >
     <Button
       variant={"outlined"} 
       style={{fontSize: 32}}

@@ -1,16 +1,21 @@
-import { Box, Button, Card, Grid } from '@mui/material';
+import { Box, Button, Card, Grid, TextField } from '@mui/material';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import TrackList from '../../components/TrackList';
 import { useTypedSelector } from '../../hooks/useTypeDSelector';
 import MyLayout from '../../layout/MyLyout';
-import { NextThunkDispatch, wrapper } from '../../store';
+import {NextThunkDispatch, wrapper} from "../../store";
 import { fetchTracks } from '../../store/action-creators/track';
 import { ITrack } from '../../types/track';
 
 const Index = () => {
   const router = useRouter()
   const {tracks, error} = useTypedSelector(state => state.track)
+  const [query, setQuery] = useState<string>('');
+
+  const search = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  }
 
   if (error) return (
     <MyLayout>
@@ -19,7 +24,7 @@ const Index = () => {
   )
   
   return (
-  <MyLayout>
+  <MyLayout title={'Список треков - музыкальная платформа'}>
     <Grid container justifyContent='center'>
       <Card style={{width: '900px'}}>
         <Box p={3}>
@@ -30,6 +35,11 @@ const Index = () => {
             </Button>
           </Grid>
         </Box>
+        <TextField
+          fullWidth
+          value={query}
+          onChange={search}
+        />
         <TrackList tracks={tracks}/>
       </Card>
     </Grid>
