@@ -5,15 +5,28 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
 import TrackList from '../../components/TrackList';
+import { useInput } from '../../hooks/useInput';
 import MyLayout from '../../layout/MyLyout';
 import { ITrack } from '../../types/track';
 
 const TrackPage = ({serverTrack}) => {
-  const [track, setTrack] = useState(serverTrack)
+  const [track, setTrack] = useState<ITrack>(serverTrack)
   const router = useRouter()
+  const username = useInput('');
+  const comment = useInput('');
 
-  const addComment = () => {
-
+  const addComment = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/tracks/comment', {
+        usernme: username.value,
+        text: comment.value,
+        trackId: track._id 
+      })
+      setTrack({...track, comments: [...track.comments, response.data]})
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
 
 
@@ -39,16 +52,18 @@ const TrackPage = ({serverTrack}) => {
     <h1>Комментарии</h1>
     <Grid container>
       <TextField
+      {...username}
         label="Ваше имя"
         fullWidth
       />
        <TextField
+       {...comment}
         label="Комментарий"
         fullWidth
         multiline
         rows={4}
       />
-      <Button>Отправить</Button>
+      <Button onClick={addComment}>Отправить</Button>
     </Grid>
     <div>
       {track.comments.map(comm => 
