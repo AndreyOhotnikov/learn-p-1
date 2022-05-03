@@ -4,23 +4,19 @@ import React from 'react';
 import TrackList from '../../components/TrackList';
 import { useTypedSelector } from '../../hooks/useTypeDSelector';
 import MyLayout from '../../layout/MyLyout';
+import { NextThunkDispatch, wrapper } from '../../store';
+import { fetchTracks } from '../../store/action-creators/track';
 import { ITrack } from '../../types/track';
 
 const Index = () => {
   const router = useRouter()
-  // const {} = useTypedSelector(state => state.player)
-  const tracks: ITrack[] = [
-    {_id: '1', name: 'yfpdfybt 1', artist: 'sdfgsdg1', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
-    {_id: '2', name: 'yfpdfybt 2', artist: 'sdfgsdg2', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
-    {_id: '3', name: 'yfpdfybt 3', artist: 'sdfgsdg3', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
-    {_id: '4', name: 'yfpdfybt 4', artist: 'sdfgsdg4', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
-    {_id: '5', name: 'yfpdfybt 5', artist: 'sdfgsdg5', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
-    {_id: '6', name: 'yfpdfybt 6', artist: 'sdfgsdg6', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
-    {_id: '7', name: 'yfpdfybt 7', artist: 'sdfgsdg7', text: 'sdfsdfgsfbfdbxbfbxbgbxbx', picture: 'https://kaifolog.ru/uploads/posts/2014-12/thumbs/1419387276_001_1.jpg', listens: 0},
+  const {tracks, error} = useTypedSelector(state => state.track)
 
-
-  ]
-
+  if (error) return (
+    <MyLayout>
+      <h1>{error}</h1>
+    </MyLayout>
+  )
   
   return (
   <MyLayout>
@@ -42,3 +38,8 @@ const Index = () => {
 }
 
 export default Index
+
+export const getServerSideProps = wrapper.getServerSideProps(async ({store}) => {
+  const dispatch = store.disptch as NextThunkDispatch
+  store.dispatch(await fetchTracks())
+})
