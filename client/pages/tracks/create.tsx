@@ -1,5 +1,7 @@
 import { Box, Button, Card, Grid, TextField } from '@mui/material';
-import { useRouter } from 'next/router';
+import axios from 'axios';
+import { route } from 'next/dist/server/router';
+import { Router, useRouter } from 'next/router';
 import React from 'react';
 import { useState } from 'react';
 import FileUpload from '../../components/FileUpload';
@@ -16,8 +18,21 @@ const CreatePage = () => {
   const name = useInput('');
   const artist = useInput('');
   const text = useInput('');
+  const router = useRouter()
+  
   const next = () => {
-    setActiveStep(prev=> prev + 1);
+    if (activeStep !==2 ) setActiveStep(prev=> prev + 1);
+    else {
+      const formData = new FormData()
+      formData.append('name', name.value)
+      formData.append('artist', artist.value)
+      formData.append('text', text.value)
+      formData.append('picture', picture)
+      formData.append('audio', audio)
+      axios.post('http://localhost:5000/tracks', formData)
+        .then(response => router.push('/tracks'))
+        .catch(e => console.log(e))
+    }
   }
 
   const back = () => {
