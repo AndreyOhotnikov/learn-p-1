@@ -5,20 +5,23 @@ import { useState } from 'react';
 import FileUpload from '../../components/FileUpload';
 import StepWrapper from '../../components/StepWrapper';
 import TrackList from '../../components/TrackList';
+import { useInput } from '../../hooks/useInput';
 import MyLayout from '../../layout/MyLyout';
 import { ITrack } from '../../types/track';
 
 const CreatePage = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [picture, setPictupe] = useState(null)
-  const [audio, setAudio] = useState(null)
-
+  const [picture, setPictupe] = useState(null);
+  const [audio, setAudio] = useState(null);
+  const name = useInput('');
+  const artist = useInput('');
+  const text = useInput('');
   const next = () => {
-    setActiveStep(prev=> prev + 1)
+    setActiveStep(prev=> prev + 1);
   }
 
   const back = () => {
-    setActiveStep(prev=> prev - 1)
+    setActiveStep(prev=> prev - 1);
   }
  
   return (
@@ -28,14 +31,17 @@ const CreatePage = () => {
      {activeStep === 0 && 
         <Grid container direction={'column'} style={{padding: 20}}>
           <TextField
+          {...name}
             style={{marginTop: 10}}
             label={'Название трека'}
           />
           <TextField
+          {...artist}
             style={{marginTop: 10}}
             label={'Имя исполнителя'}
           />
            <TextField
+           {...text}
             style={{marginTop: 10}}
             label={'Слова к треку'}
             multiline

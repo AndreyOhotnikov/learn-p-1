@@ -24,7 +24,7 @@ const Player: React.FC<PlayerProps> = ({file, setFile, accept, children}) => {
   
   const setAudio = () => {
     if (active) {
-      audio.src = active.audio;
+      audio.src = 'http://localhost:5000/' + active.audio;
       audio.volume = volume / 100
       audio.onLoadedmetadata = () => {
         setDuration(Math.floor(audio.duration))
@@ -34,7 +34,7 @@ const Player: React.FC<PlayerProps> = ({file, setFile, accept, children}) => {
       }
     }
   }
-  
+
   const play = () => {
     console.log('fdgdfgdfg')
     if (pause) {
